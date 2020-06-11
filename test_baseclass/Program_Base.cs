@@ -7,7 +7,8 @@ namespace test_baseclass
     static void Main(string[] args)
     {
 
-      var o= new Person();
+      Person o;
+      //Object o;
       char c;
       do
       {
@@ -17,42 +18,35 @@ namespace test_baseclass
           o = new Employee();
         else
           o = new Customer();
-         
-         o.GetInfo();
+
+        o.GetInfo();
 
       } while (c != 0x1B);
 
-      Employee E = new Employee();
-      E.GetInfo();
-      Customer C = new Customer();
-      C.GetInfo();
-
-      Console.ReadKey();
     }
   }
   public class Person
   {
-    protected string ssn = "444-55-6666";
     protected string name = "John Smith";
+    public Person()
+    { Console.WriteLine("Base Constructor"); } //base class contructor
 
     public virtual void GetInfo()
-    {
-      Console.WriteLine("Name: {0}", name);
-      Console.WriteLine("SSN: {0}", ssn);
-    }
+    { Console.WriteLine("Name: {0}", name); }
   }
   class Employee : Person
   {
-    public string id = "ABC567EFG";
+    // public Employee():base() { }      //Base Constructor called implicitly
     public override void GetInfo()
     {
-      base.GetInfo();            // Calling the base class GetInfo method:
-      Console.WriteLine("Employee ID: {0}", id);
+      name = "Employee: Joe Smith";
+      base.GetInfo();                   
     }
   }
   class Customer : Person
   {
     public string id = "ABC123456";
+    public Customer() : base() { }      //Base Constructor called explicitly
     public override void GetInfo()
     {
       base.GetInfo();            // Calling the base class GetInfo method:
